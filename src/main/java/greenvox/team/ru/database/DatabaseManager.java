@@ -6,7 +6,7 @@ public class DatabaseManager {
 
     public static void applyDiseaseToPlayer(Player p) {
         // Create database and add player into it.
-        String name = p.getName()
+        String name = p.getName();
     }
 
     public static void removeDiseaseFromPlayer(Player p) {
