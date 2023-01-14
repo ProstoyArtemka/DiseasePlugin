@@ -44,4 +44,9 @@ public class DataBase {
         Main.getData().save();
     }
 
+    public static void delete(String path){
+        Main.getData().getConfig().set(path, null);
+        Main.getData().save();
+    }
+
 }
