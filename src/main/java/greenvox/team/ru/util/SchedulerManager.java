@@ -3,6 +3,7 @@ package greenvox.team.ru.util;
 import greenvox.team.ru.Main;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 
 public class SchedulerManager {
@@ -25,6 +26,11 @@ public class SchedulerManager {
         Runnables.put(name, runnable);
 
         runnable.runTaskTimer(Main.getInstance(), delay, period);
+    }
+
+    @Nullable
+    public BukkitRunnable getRunnable(String name) {
+        return Runnables.getOrDefault(name, null);
     }
 
     public static void cancelTask(String name) {
