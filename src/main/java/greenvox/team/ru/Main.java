@@ -1,5 +1,6 @@
 package greenvox.team.ru;
 
+import greenvox.team.ru.managers.DiseaseManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -10,7 +11,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         Instance = this;
 
-
+        DiseaseManager.runDiseaseTimer();
     }
 
     @Override
