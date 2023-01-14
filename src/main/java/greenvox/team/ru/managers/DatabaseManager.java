@@ -21,4 +21,8 @@ public class DatabaseManager {
         // Return Disease level from database
         return -1;
     }
+
+    public static void setDiseaseLevelToPlayer(Player p, int level) {
+        // Set level in database
+    }
 }

@@ -2,10 +2,8 @@ package greenvox.team.ru.managers;
 
 import greenvox.team.ru.disease.Symptom;
 import org.bukkit.entity.Player;
-import sun.jvm.hotspot.debugger.cdbg.Sym;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DiseaseManager {
     // Use Arrays.asList();
