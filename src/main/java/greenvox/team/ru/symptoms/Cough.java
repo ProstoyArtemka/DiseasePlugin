@@ -1,5 +1,6 @@
 package greenvox.team.ru.symptoms;
 
+import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.disease.DiseaseManager;
 import greenvox.team.ru.disease.Symptom;
 import greenvox.team.ru.util.CoughManager;
@@ -10,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.RayTraceResult;
 
-import greenvox.team.ru.disease.DiseaseManager.*;
 
 
 public class Cough implements Symptom {
@@ -40,7 +40,7 @@ public class Cough implements Symptom {
         if (result != null) {
             Player tracedPlayer = (Player) result.getHitEntity();
 
-            DiseaseManager.executeRandomSymptom(1,tracedPlayer);
+            DatabaseManager.applyDiseaseToPlayer(tracedPlayer);
         }
     }
 
