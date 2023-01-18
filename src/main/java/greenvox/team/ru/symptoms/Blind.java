@@ -3,16 +3,32 @@ package greenvox.team.ru.symptoms;
 import greenvox.team.ru.disease.Symptom;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class Blind implements Symptom {
-    @Override
-    public void init(JavaPlugin main) {
 
+    private static final List<PotionEffectType> Type = Arrays.asList(
+            PotionEffectType.BLINDNESS,
+            PotionEffectType.DARKNESS
+    );
+
+    private PotionEffectType getRandomBlindnessEffect() {
+        return Type.get(new Random().nextInt(Type.size()));
     }
 
     @Override
-    public void execute(Player player) {
+    public void init(JavaPlugin main) {}
 
+    @Override
+    public void execute(Player player) {
+        PotionEffectType type = getRandomBlindnessEffect();
+
+        player.addPotionEffect(new PotionEffect(type, 60 * 20, 1));
     }
 
     @Override
