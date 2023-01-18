@@ -9,6 +9,7 @@ public class DiseaseExecutor extends BukkitRunnable {
     @Override
     public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
+            if (!DatabaseManager.isPlayerIsInfected(p)) continue;
             int level = DatabaseManager.getDiseaseLevelFromPlayer(p);
 
             DiseaseManager.executeRandomSymptom(level, p);
