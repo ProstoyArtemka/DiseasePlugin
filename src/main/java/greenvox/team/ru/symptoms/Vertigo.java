@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
+
+import java.util.Random;
 
 public class Vertigo implements Symptom {
     @Override
@@ -17,11 +17,11 @@ public class Vertigo implements Symptom {
 
     @Override
     public void execute(Player player) {
-        int minSec = 5;
-        int maxSec = 10;
+        int start = 5;
+        int end = 10;
 
-        int sec = (int) ((Math.random() * (maxSec - minSec)) + minSec);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, sec, 3));
+        int seconds = new Random().nextInt(end - start) + start;
+        player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, seconds, 3));
 
         SchedulerManager.runTask("vertigo_task", new VertigoScheduler());
     }

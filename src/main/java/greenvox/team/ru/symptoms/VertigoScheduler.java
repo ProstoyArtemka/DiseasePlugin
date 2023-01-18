@@ -7,32 +7,35 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.Random;
+
 public class VertigoScheduler extends BukkitRunnable {
-        int count = 0;
+
+    private int Count = 0;
+
     @Override
     public void run() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (DatabaseManager.isPlayerIsInfected(player)) {
+            if (!DatabaseManager.isPlayerIsInfected(player)) continue;
 
-                int minSec = 5;
-                int maxSec = 10;
-                int minVelocity = -1;
-                int maxVelocity = 2;
-                int range = maxVelocity - minVelocity + 1;
+            int start = 5;
+            int end = 10;
+            int minVelocity = -1;
+            int maxVelocity = 2;
+            int range = maxVelocity - minVelocity + 1;
 
-                int sec = (int) ((Math.random() * (maxSec - minSec)) + minSec);
-                int random = (int) (Math.random() * range) + minVelocity;
+            int seconds = new Random().nextInt(end - start) + start;
+            double random = (new Random().nextFloat() * range + minVelocity);
 
-                Vector playerVelocity = player.getVelocity().normalize();
+            Vector playerVelocity = player.getVelocity().normalize();
 
-                playerVelocity.setY(random);
-                playerVelocity.setX(random);
+            playerVelocity.setY(random);
+            playerVelocity.setX(random);
 
-                count++;
+            Count++;
 
-                if (count >= sec) {
-                    SchedulerManager.cancelTask("vertigo_task");
-                }
+            if (Count >= seconds) {
+                SchedulerManager.cancelTask("vertigo_task");
             }
         }
     }
