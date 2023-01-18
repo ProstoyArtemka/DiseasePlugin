@@ -1,12 +1,7 @@
-package greenvox.team.ru.managers;
+package greenvox.team.ru.disease;
 
 import greenvox.team.ru.Main;
-import greenvox.team.ru.disease.DiseaseExecutor;
-import greenvox.team.ru.disease.Symptom;
-import greenvox.team.ru.symptoms.Blind;
-import greenvox.team.ru.symptoms.Cold;
-import greenvox.team.ru.symptoms.Cough;
-import greenvox.team.ru.symptoms.Faint;
+import greenvox.team.ru.symptoms.*;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.entity.Player;
 
