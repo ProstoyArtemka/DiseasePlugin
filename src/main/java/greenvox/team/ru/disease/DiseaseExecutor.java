@@ -20,7 +20,7 @@ public class DiseaseExecutor extends BukkitRunnable {
                 public void run() {
                     DiseaseManager.executeRandomSymptom(level, p);
                 }
-            }, new Random().nextInt(10 * 20));
+            }, new Random().nextInt(new Random().nextInt(10) * 20));
         }
 
         DiseaseManager.runDiseaseTimer();

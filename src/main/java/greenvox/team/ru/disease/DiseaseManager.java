@@ -25,7 +25,7 @@ public class DiseaseManager {
         ArrayList<Symptom> s = new ArrayList<>();
 
         for (Symptom p : Symptoms) {
-            if (p.getLevel() == level)
+            if (p.getLevel() >= level)
                 s.add(p);
         }
 
