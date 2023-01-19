@@ -31,8 +31,6 @@ public class DiseaseManager {
 
         int index = random.nextInt(s.size());
 
-        Bukkit.getLogger().info(s.get(index).getClass().getName().split("\\.")[4]);
-
         return s.get(index);
     }
 

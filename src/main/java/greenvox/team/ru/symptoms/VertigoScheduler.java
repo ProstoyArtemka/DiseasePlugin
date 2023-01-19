@@ -23,9 +23,6 @@ public class VertigoScheduler extends BukkitRunnable {
     public void run() {
         if (!Player.isOnline()) return;
 
-        Bukkit.getLogger().info(String.valueOf(Count));
-        Bukkit.getLogger().info(Player.getName());
-
         double minVelocity = -0.1;
         double maxVelocity = 0.2;
 

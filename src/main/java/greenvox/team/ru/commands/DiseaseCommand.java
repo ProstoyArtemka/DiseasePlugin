@@ -60,10 +60,8 @@ public class DiseaseCommand {
     @NeedsOp
     public static void execute(Player player, @AStringArgument String name) {
         for (Symptom s : DiseaseManager.Symptoms) {
-            if (s.getClass().getName().toLowerCase().split("\\.")[4].equals(name)) {
+            if (s.getClass().getName().toLowerCase().split("\\.")[4].equals(name))
                 s.execute(player);
-                Bukkit.getLogger().info("OK");
-            }
         }
     }
 
@@ -71,10 +69,8 @@ public class DiseaseCommand {
     @NeedsOp
     public static void execute(CommandSender sender, @APlayerArgument Player target, @AStringArgument String name) {
         for (Symptom s : DiseaseManager.Symptoms) {
-            if (s.getClass().getName().toLowerCase().split("\\.")[4].equals(name)) {
+            if (s.getClass().getName().toLowerCase().split("\\.")[4].equals(name))
                 s.execute(target);
-                Bukkit.getLogger().info("OK");
-            }
         }
     }
 
