@@ -21,7 +21,8 @@ public class DiseaseManager {
             new Fall(),
             new Fire(),
             new ItemDrop(),
-            new Weakness()
+            new Weakness(),
+            new Hunger()
     );
 
     private static Symptom getRandomSymptomFromLevel(int level) {
