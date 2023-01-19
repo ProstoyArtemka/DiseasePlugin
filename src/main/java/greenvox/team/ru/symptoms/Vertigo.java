@@ -29,6 +29,6 @@ public class Vertigo implements Symptom {
 
     @Override
     public int getLevel() {
-        return 0;
+        return 1;
     }
 }

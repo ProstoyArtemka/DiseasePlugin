@@ -22,7 +22,7 @@ public class ItemDrop implements Symptom {
 
     @Override
     public int getLevel() {
-        return 0;
+        return 3;
     }
 
     private void dropItem(Player player) {

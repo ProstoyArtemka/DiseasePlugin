@@ -17,6 +17,6 @@ public class Faint implements Symptom {
 
     @Override
     public int getLevel() {
-        return 0;
+        return 3;
     }
 }

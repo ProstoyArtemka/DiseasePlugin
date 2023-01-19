@@ -48,6 +48,6 @@ public class Cough implements Symptom {
 
     @Override
     public int getLevel() {
-        return 0;
+        return 3;
     }
 }
