@@ -7,7 +7,11 @@ import dev.jorel.commandapi.annotations.NeedsOp;
 import dev.jorel.commandapi.annotations.Subcommand;
 import dev.jorel.commandapi.annotations.arguments.AIntegerArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
+import dev.jorel.commandapi.annotations.arguments.AStringArgument;
 import greenvox.team.ru.database.DatabaseManager;
+import greenvox.team.ru.disease.DiseaseManager;
+import greenvox.team.ru.disease.Symptom;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -50,6 +54,28 @@ public class DiseaseCommand {
     @NeedsOp
     public static void level(Player player, @AIntegerArgument int level) {
         DatabaseManager.setDiseaseLevelToPlayer(player, level);
+    }
+
+    @Subcommand("execute")
+    @NeedsOp
+    public static void execute(Player player, @AStringArgument String name) {
+        for (Symptom s : DiseaseManager.Symptoms) {
+            if (s.getClass().getName().toLowerCase().split("\\.")[4].equals(name)) {
+                s.execute(player);
+                Bukkit.getLogger().info("OK");
+            }
+        }
+    }
+
+    @Subcommand("execute")
+    @NeedsOp
+    public static void execute(CommandSender sender, @APlayerArgument Player target, @AStringArgument String name) {
+        for (Symptom s : DiseaseManager.Symptoms) {
+            if (s.getClass().getName().toLowerCase().split("\\.")[4].equals(name)) {
+                s.execute(target);
+                Bukkit.getLogger().info("OK");
+            }
+        }
     }
 
     public static void init() {

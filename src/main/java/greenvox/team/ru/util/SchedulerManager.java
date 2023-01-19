@@ -11,18 +11,21 @@ public class SchedulerManager {
     private static final HashMap<String, BukkitRunnable> Runnables = new HashMap<>();
 
     public static void runTask(String name, BukkitRunnable runnable) {
+        Runnables.remove(name);
         Runnables.put(name, runnable);
 
         runnable.runTask(Main.getInstance());
     }
 
     public static void runTaskLater(String name, BukkitRunnable runnable, long delay) {
+        Runnables.remove(name);
         Runnables.put(name, runnable);
 
         runnable.runTaskLater(Main.getInstance(), delay);
     }
 
     public static void runTaskTimer(String name, BukkitRunnable runnable, long delay, long period) {
+        Runnables.remove(name);
         Runnables.put(name, runnable);
 
         runnable.runTaskTimer(Main.getInstance(), delay, period);

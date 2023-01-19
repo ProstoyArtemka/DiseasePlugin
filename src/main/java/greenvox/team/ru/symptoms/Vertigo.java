@@ -17,13 +17,14 @@ public class Vertigo implements Symptom {
 
     @Override
     public void execute(Player player) {
-        int start = 5;
-        int end = 10;
+        int start = 10;
+        int end = 15;
+        String taskName = "vertigo_task_" + player.getName();
 
         int seconds = new Random().nextInt(end - start) + start;
-        player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, seconds, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, seconds * 20, 3));
 
-        SchedulerManager.runTask("vertigo_task", new VertigoScheduler());
+        SchedulerManager.runTaskTimer(taskName, new VertigoScheduler(seconds, player), 0, 5);
     }
 
     @Override

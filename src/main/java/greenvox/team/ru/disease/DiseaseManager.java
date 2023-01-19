@@ -3,6 +3,7 @@ package greenvox.team.ru.disease;
 import greenvox.team.ru.Main;
 import greenvox.team.ru.symptoms.*;
 import greenvox.team.ru.util.SchedulerManager;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class DiseaseManager {
 
         int index = random.nextInt(s.size());
 
+        Bukkit.getLogger().info(s.get(index).getClass().getName().split("\\.")[4]);
+
         return s.get(index);
     }
 
@@ -39,7 +42,7 @@ public class DiseaseManager {
     }
 
     public static void runDiseaseTimer() {
-        int time = new Random().nextInt(20 * 10) + 10 * 20;
+        int time = new Random().nextInt(20 * 10) + 20 * 10;
 
         SchedulerManager.runTaskLater("disease_executor", new DiseaseExecutor(), time);
     }

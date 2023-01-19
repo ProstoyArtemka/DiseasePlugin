@@ -1,6 +1,5 @@
 package greenvox.team.ru.symptoms;
 
-import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,31 +11,34 @@ import java.util.Random;
 public class VertigoScheduler extends BukkitRunnable {
 
     private int Count = 0;
+    private final long Time;
+    private final Player Player;
+
+    public VertigoScheduler(long time, Player player) {
+        Time = time;
+        Player = player;
+    }
 
     @Override
     public void run() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (!DatabaseManager.isPlayerIsInfected(player)) continue;
+        if (!Player.isOnline()) return;
 
-            int start = 5;
-            int end = 10;
-            int minVelocity = -1;
-            int maxVelocity = 2;
-            int range = maxVelocity - minVelocity + 1;
+        Bukkit.getLogger().info(String.valueOf(Count));
+        Bukkit.getLogger().info(Player.getName());
 
-            int seconds = new Random().nextInt(end - start) + start;
-            double random = (new Random().nextFloat() * range + minVelocity);
+        double minVelocity = -0.1;
+        double maxVelocity = 0.2;
 
-            Vector playerVelocity = player.getVelocity().normalize();
+        Vector playerVelocity = Player.getVelocity();
+        playerVelocity.setX((new Random().nextFloat() * maxVelocity) + minVelocity);
+        playerVelocity.setZ((new Random().nextFloat() * maxVelocity) + minVelocity);
 
-            playerVelocity.setY(random);
-            playerVelocity.setX(random);
+        Player.setVelocity(playerVelocity);
 
-            Count++;
+        Count++;
 
-            if (Count >= seconds) {
-                SchedulerManager.cancelTask("vertigo_task");
-            }
+        if (Count >= Time * 4) {
+            SchedulerManager.cancelTask("vertigo_task_" + Player.getName());
         }
     }
 }
