@@ -12,7 +12,7 @@ public class Fall implements Symptom {
 
     @Override
     public void execute(Player player) {
-
+        player.chat("/lay");
     }
 
     @Override

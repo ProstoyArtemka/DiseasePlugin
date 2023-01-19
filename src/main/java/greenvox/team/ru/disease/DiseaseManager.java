@@ -17,7 +17,11 @@ public class DiseaseManager {
             new Cold(),
             new Cough(),
             new Faint(),
-            new Vertigo()
+            new Vertigo(),
+            new Fall(),
+            new Fire(),
+            new ItemDrop(),
+            new Weakness()
     );
 
     private static Symptom getRandomSymptomFromLevel(int level) {
