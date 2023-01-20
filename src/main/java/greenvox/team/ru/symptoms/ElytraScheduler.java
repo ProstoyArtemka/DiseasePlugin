@@ -22,13 +22,13 @@ public class ElytraScheduler extends BukkitRunnable implements Listener {
             if (!Player.isOnline()) return;
             if (!Player.isGliding()) return;
 
-            Particle.DustOptions color = new Particle.DustOptions(Color.fromRGB(78, 4, 177), 0.5F);
+            Particle.DustOptions color = new Particle.DustOptions(Color.fromRGB(78, 4, 177), 2F);
             Player.getWorld().spawnParticle(Particle.REDSTONE, Player.getLocation(), 5, color);
             Player.setGliding(false);
 
             Count++;
             if (Count >= Time) {
-                SchedulerManager.cancelTask("elytra_task_");
+                SchedulerManager.cancelTask("elytra_task_" + Player.getName());
             }
 
         }
