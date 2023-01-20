@@ -11,6 +11,8 @@ public class SchedulerManager {
     private static final HashMap<String, BukkitRunnable> Runnables = new HashMap<>();
 
     public static void runTask(String name, BukkitRunnable runnable) {
+        if (getRunnable(name) != null) cancelTask(name);
+
         Runnables.remove(name);
         Runnables.put(name, runnable);
 
@@ -18,6 +20,8 @@ public class SchedulerManager {
     }
 
     public static void runTaskLater(String name, BukkitRunnable runnable, long delay) {
+        if (getRunnable(name) != null) cancelTask(name);
+
         Runnables.remove(name);
         Runnables.put(name, runnable);
 
@@ -25,6 +29,8 @@ public class SchedulerManager {
     }
 
     public static void runTaskTimer(String name, BukkitRunnable runnable, long delay, long period) {
+        if (getRunnable(name) != null) cancelTask(name);
+
         Runnables.remove(name);
         Runnables.put(name, runnable);
 
@@ -32,7 +38,7 @@ public class SchedulerManager {
     }
 
     @Nullable
-    public BukkitRunnable getRunnable(String name) {
+    public static BukkitRunnable getRunnable(String name) {
         return Runnables.getOrDefault(name, null);
     }
 
