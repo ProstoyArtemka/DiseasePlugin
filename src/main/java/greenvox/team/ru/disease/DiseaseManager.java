@@ -46,7 +46,7 @@ public class DiseaseManager {
     }
 
     public static void runDiseaseTimer() {
-        int time = new Random().nextInt(20 * 10) + 20 * 10;
+        int time = new Random().nextInt(30 * 10) + 30 * 10;
 
         SchedulerManager.runTaskLater("disease_executor", new DiseaseExecutor(), time);
     }
