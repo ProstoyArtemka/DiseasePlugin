@@ -16,7 +16,7 @@ public class DiseaseManager {
             new Blind(),
             new Cold(),
             new Cough(),
-            new Faint(),
+            //new Faint(),
             new Vertigo(),
             new Fall(),
             new Fire(),

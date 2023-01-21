@@ -30,6 +30,5 @@ public class ElytraScheduler extends BukkitRunnable implements Listener {
             if (Count >= Time) {
                 SchedulerManager.cancelTask("elytra_task_" + Player.getName());
             }
-
         }
     }

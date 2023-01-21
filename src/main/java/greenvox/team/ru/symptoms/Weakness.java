@@ -33,7 +33,7 @@ public class Weakness implements Symptom {
         int seconds = new Random().nextInt(end - start) + start;
         PotionEffectType type = getRandomBlindnessEffect();
 
-        player.addPotionEffect(new PotionEffect(type, seconds, 3));
+        player.addPotionEffect(new PotionEffect(type, seconds * 20, 3));
     }
 
     @Override
