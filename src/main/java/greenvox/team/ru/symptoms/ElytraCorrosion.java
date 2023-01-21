@@ -15,7 +15,12 @@ public class ElytraCorrosion implements Symptom {
 
     @Override
     public void execute(Player player) {
-       SchedulerManager.runTask("elytra_scheduler", new ElytraScheduler());
+        int start = 1;
+        int end = 4;
+        String taskName = "elytra_task_" + player.getName();
+        int seconds = new Random().nextInt(end - start) + start;
+
+       SchedulerManager.runTaskTimer(taskName, new ElytraScheduler(seconds, player), 3, 1);
     }
 
     @Override
