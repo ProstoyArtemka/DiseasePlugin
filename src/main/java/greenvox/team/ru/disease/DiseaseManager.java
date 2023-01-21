@@ -31,12 +31,11 @@ public class DiseaseManager {
         ArrayList<Symptom> s = new ArrayList<>();
 
         for (Symptom p : Symptoms) {
-            if (p.getLevel() >= level)
+            if (p.getLevel() <= level)
                 s.add(p);
         }
 
         int index = random.nextInt(s.size());
-
         return s.get(index);
     }
 
@@ -46,7 +45,7 @@ public class DiseaseManager {
     }
 
     public static void runDiseaseTimer() {
-        int time = new Random().nextInt(30 * 10) + 30 * 10;
+        int time = new Random().nextInt(40 * 20) + 40 * 20;
 
         SchedulerManager.runTaskLater("disease_executor", new DiseaseExecutor(), time);
     }
