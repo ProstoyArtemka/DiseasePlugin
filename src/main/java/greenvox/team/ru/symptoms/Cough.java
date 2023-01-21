@@ -4,6 +4,7 @@ import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.disease.Symptom;
 import org.bukkit.Color;
 import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.RayTraceResult;
@@ -21,6 +22,7 @@ public class Cough implements Symptom {
         Particle.DustOptions color = new Particle.DustOptions(Color.fromRGB(109, 249, 203), 0.5F);
 
         player.spawnParticle(Particle.REDSTONE, player.getEyeLocation(), 5, color);
+        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_PANDA_SNEEZE,2, 1);
         pushAway(player, 0.25f);
 
         // Tracing if player looking at another player (Changed lambda)

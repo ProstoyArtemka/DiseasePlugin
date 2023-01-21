@@ -28,7 +28,7 @@ public class Blind implements Symptom {
     public void execute(Player player) {
         PotionEffectType type = getRandomBlindnessEffect();
 
-        player.addPotionEffect(new PotionEffect(type, 60 * 20, 1));
+        player.addPotionEffect(new PotionEffect(type, 30 * 20, 1));
     }
 
     @Override
