@@ -9,6 +9,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -44,6 +45,11 @@ public class Cough implements Symptom {
                 e -> e != player && e instanceof Player
         );
 
+        //bottle feature
+        if (player.getInventory().getItemInMainHand().getType() == Material.GLASS_BOTTLE) {
+            bottleBreak(player);
+        }
+
         if (result == null) return;
         Player tracedPlayer = (Player) result.getHitEntity();
 
@@ -71,6 +77,15 @@ public class Cough implements Symptom {
 
         Vector UnitVector = player.getLocation().getDirection().normalize();
         player.setVelocity(UnitVector.multiply(-speed));
+    }
+
+    private void bottleBreak(Player player) {
+        
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        itemStack.setAmount(itemStack.getAmount() - 1);
+
+        player.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, player.getLocation(), 3);
+        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, 1,1);
     }
 
     @Override
