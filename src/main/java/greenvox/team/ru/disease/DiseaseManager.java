@@ -3,7 +3,6 @@ package greenvox.team.ru.disease;
 import greenvox.team.ru.Main;
 import greenvox.team.ru.symptoms.*;
 import greenvox.team.ru.util.SchedulerManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -20,10 +19,11 @@ public class DiseaseManager {
             new Vertigo(),
             new Fall(),
             new Fire(),
-            new ItemDrop(),
             new Weakness(),
             new Hunger(),
-            new ElytraCorrosion()
+            new ElytraCorrosion(),
+            new Puke(),
+            new SwapItems()
     );
 
     private static Symptom getRandomSymptomFromLevel(int level) {

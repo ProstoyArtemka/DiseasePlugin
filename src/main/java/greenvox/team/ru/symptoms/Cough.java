@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
@@ -58,7 +60,9 @@ public class Cough implements Symptom {
         if (!DatabaseManager.isPlayerIsInfected(player))
             DatabaseManager.applyDiseaseToPlayer(player);
         else
-            DatabaseManager.setDiseaseLevelToPlayer(player, DatabaseManager.getDiseaseLevelFromPlayer(player));
+            DatabaseManager.setDiseaseLevelToPlayer(player, DatabaseManager.getDiseaseLevelFromPlayer(player) + 1);
+
+        player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 5 * 20, 1));
     }
 
     // Moved from CoughManager
