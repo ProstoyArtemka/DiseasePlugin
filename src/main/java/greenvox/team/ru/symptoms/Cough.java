@@ -3,10 +3,7 @@ package greenvox.team.ru.symptoms;
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.disease.Symptom;
 import greenvox.team.ru.recipes.MaskRecipe;
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
@@ -80,11 +77,12 @@ public class Cough implements Symptom {
     }
 
     private void bottleBreak(Player player) {
-        
+
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         itemStack.setAmount(itemStack.getAmount() - 1);
 
-        player.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, player.getLocation(), 3);
+        player.getWorld().spawnParticle(Particle.EXPLOSION_NORMAL, player.getLocation(), 3, new Particle.DustOptions(Color.fromRGB(109, 249, 203), 1));
+        player.getWorld().spawnParticle(Particle.BLOCK_CRACK, player.getLocation(),5, Bukkit.createBlockData(Material.GLASS));
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, 1,1);
     }
 
