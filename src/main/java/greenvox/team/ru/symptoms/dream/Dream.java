@@ -36,6 +36,7 @@ public class Dream implements Symptom {
 
 
         taskIdList.put(player.getName(), taskId);
+        
 
     }
 
