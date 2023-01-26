@@ -37,8 +37,8 @@ public class DataBase {
             throw new RuntimeException("Не получилось сохранить файл", e);
         }
     }
-    public static void write(String path, String data){
-        Main.getData().getConfig().set(path, data);
+    public static void write(String path, Object object){
+        Main.getData().getConfig().set(path, object);
         Main.getData().save();
     }
 

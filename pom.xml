@@ -70,7 +70,7 @@
             <url>https://repo.ranull.com/maven/external/</url>
         </repository>
         <repository>
-            <id>io/github/kosmx/emotes/emotesAPI/maven-metadata.xml</id>
+            <id>io-github-kosmx-emotes-emotesAPI-maven-metadata.xml</id>
             <url>https://maven.kosmx.dev/</url>
         </repository>
     </repositories>

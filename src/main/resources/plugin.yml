@@ -3,4 +3,5 @@ version: '${project.version}'
 main: greenvox.team.ru.Main
 api-version: 1.19
 authors: [ ProstoyArtemka, Jiuuc, Unillion ]
-softdepend: [ CommandAPI, Brewery, PlayerNPC ]
+softdepend: [ CommandAPI, Brewery, PlayerNPC, emotecraft ]
+depend: [PlayerNPC]

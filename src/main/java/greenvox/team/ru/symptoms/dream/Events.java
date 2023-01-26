@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
 
-public class CancelDream implements Listener {
+public class Events implements Listener {
 
     private static ArrayList<String> quitedPlayers = new ArrayList<>();
 
