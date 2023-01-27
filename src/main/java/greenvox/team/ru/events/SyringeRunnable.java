@@ -63,7 +63,7 @@ static {
 
         meta.setDisplayName(ChatColor.WHITE + "Шприц с зараженной кровью");
         meta.setLore(Arrays.asList(
-                ChatColor.GRAY + "Кровь в данном шприце имеет странноватый оттенок"
+                ChatColor.DARK_GRAY + "Кровь в данном шприце имеет странноватый оттенок."
         ));
         meta.setCustomModelData(615);
         itemStack.setItemMeta(meta);
