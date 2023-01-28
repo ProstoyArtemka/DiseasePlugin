@@ -73,8 +73,10 @@ public class SyringeRunnable extends BukkitRunnable {
             if (DatabaseManager.isPlayerIsInfected(target)) {
 
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
+
                 player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
                 player.getInventory().addItem(InfectedSyringe);
+
                 target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 1));
 
                 SchedulerManager.cancelTask("syringe_task_" + player.getName());
