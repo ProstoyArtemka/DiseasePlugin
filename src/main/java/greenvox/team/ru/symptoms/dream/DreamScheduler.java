@@ -1,6 +1,7 @@
 package greenvox.team.ru.symptoms.dream;
 
 import greenvox.team.ru.Main;
+import greenvox.team.ru.util.SchedulerManager;
 import io.github.kosmx.emotes.api.events.server.ServerEmoteAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -24,10 +25,12 @@ public class DreamScheduler extends BukkitRunnable {
         Dream.NpcIdList.put(player.getName(), Dream.id);
 
         Dream.tpInDream(player);
-        int timer = new Random(20).nextInt(60);
+        int timer = new Random().nextInt(30, 60);
 
-        int taskId = Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), ()->
-                Dream.returnFromDream(player), timer*20);
+        int taskId = Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), ()->{
+            Dream.returnFromDream(player);
+            SchedulerManager.cancelTask("Dream.particle."+player.getName());
+        }, timer*20);
 
 
         Dream.taskIdList.put(player.getName(), taskId);

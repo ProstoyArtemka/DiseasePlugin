@@ -1,7 +1,6 @@
 package greenvox.team.ru;
 
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
-import dev.sergiferry.playernpc.api.NPC;
 import dev.sergiferry.playernpc.api.NPCLib;
 import greenvox.team.ru.commands.DiseaseCommand;
 import greenvox.team.ru.database.DataBase;
@@ -15,11 +14,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.units.qual.A;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.logging.Logger;
