@@ -18,7 +18,7 @@ public class SyringeRecipe extends ShapedRecipe {
     public static ItemStack Syringe = new ItemStack(Material.GLASS_BOTTLE);
 
     static {
-        ItemMeta meta = (ItemMeta) Syringe.getItemMeta();
+        ItemMeta meta = Syringe.getItemMeta();
 
         meta.setDisplayName(ChatColor.WHITE + "Медицинский шприц");
         meta.setLore(Arrays.asList(
