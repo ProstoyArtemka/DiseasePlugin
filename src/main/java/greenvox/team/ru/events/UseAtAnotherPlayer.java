@@ -21,20 +21,32 @@ public class UseAtAnotherPlayer implements Listener {
         if (alreadyUse.contains(e.getPlayer().getName())) {
             alreadyUse.remove(e.getPlayer().getName());
         }
+        Player player = e.getPlayer();
         Entity entity = e.getRightClicked();
         if (!(entity instanceof Player)) return;
 
-
         if (DatabaseManager.isPlayerIsInfected((Player) entity)) {
-            Player player = e.getPlayer();
             String taskName = "syringe_task_" + player.getName();
 
             if (player.getInventory().getItemInMainHand().hasItemMeta()) {
                 if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRecipe.SyringeTag)) {
+
                     alreadyUse.add(player.getName());
                     SchedulerManager.runTaskTimer(taskName, new SyringeRunnable(player, (Player) entity), 1, 1);
+
                 }
             }
+        } else {
+            String infectedFilledSyringe = "InfectedFilled_task_" + player.getName();
+
+            if (player.getInventory().getItemInMainHand().hasItemMeta()) {
+                if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRunnable.InfectedSyringeTag)) {
+
+                    alreadyUse.add(player.getName());
+                    SchedulerManager.runTaskTimer(infectedFilledSyringe, new InfectedFilledSyringeRunnable(player, (Player) entity), 1, 1);
+                }
+            }
+
         }
     }
 }

@@ -1,37 +1,28 @@
 package greenvox.team.ru.events;
 
-import greenvox.team.ru.Main;
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.recipes.SyringeRecipe;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
-import java.util.Arrays;
 
-
-public class SyringeRunnable extends BukkitRunnable {
+public class InfectedFilledSyringeRunnable extends BukkitRunnable {
     int mainTimer = 0;
     int progressTimer = 0;
     Player player;
     Player target;
     Vector playerStartLoc;
     Vector targetStartLoc;
-    public static NamespacedKey InfectedSyringeTag = NamespacedKey.fromString("filled_tag", Main.getInstance());
 
-
-    public SyringeRunnable(Player player, Player target) {
+    public InfectedFilledSyringeRunnable(Player player, Player target) {
 
         this.player = player;
         playerStartLoc = player.getLocation().toVector();
@@ -52,31 +43,20 @@ public class SyringeRunnable extends BukkitRunnable {
         mainTimer++;
     }
 
+    //infection to player
     private void success() {
-        //Infected Syringe Meta
-        ItemStack itemStack = new ItemStack(Material.GLASS_BOTTLE);
-        ItemMeta meta = (ItemMeta) itemStack.getItemMeta();
-
-        meta.setDisplayName(ChatColor.WHITE + "Шприц с кровью");
-        meta.setLore(Arrays.asList(
-                ChatColor.DARK_GRAY + "Кровь в данном шприце имеет странноватый оттенок."
-        ));
-        meta.setCustomModelData(615);
-        meta.getPersistentDataContainer().set(InfectedSyringeTag, PersistentDataType.INTEGER, 3);
-        itemStack.setItemMeta(meta);
-
         UseAtAnotherPlayer.alreadyUse.remove(player.getName());
 
-        if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRecipe.SyringeTag)) {
-            if (DatabaseManager.isPlayerIsInfected(target)) {
+         if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRunnable.InfectedSyringeTag)) {
 
-                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
-                player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
-                player.getInventory().addItem(itemStack);
-                target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 1));
+            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
+            player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+            player.getInventory().addItem(SyringeRecipe.Syringe);
 
-                SchedulerManager.cancelTask("syringe_task_" + player.getName());
-            }
+            target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 1));
+
+            DatabaseManager.applyDiseaseToPlayer(target);
+            SchedulerManager.cancelTask("InfectedFilled_task_" + player.getName());
         }
     }
     private void fail(){
@@ -87,7 +67,7 @@ public class SyringeRunnable extends BukkitRunnable {
         player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 0.2f, 1);
         player.sendActionBar(ChatColor.translateAlternateColorCodes('&', str));
 
-        SchedulerManager.cancelTask("syringe_task_" + player.getName());
+        SchedulerManager.cancelTask("InfectedFilled_task_" + player.getName());
     }
 
     private void progress(){
@@ -113,7 +93,6 @@ public class SyringeRunnable extends BukkitRunnable {
         if(!player.getLocation().toVector().equals(playerStartLoc)) return true;
         if(!target.getLocation().toVector().equals(targetStartLoc)) return true;
 
-        if (!player.getInventory().getItemInMainHand().hasItemMeta()) return true;
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR) return true;
 
         if(rayTrace() == null) return true;
