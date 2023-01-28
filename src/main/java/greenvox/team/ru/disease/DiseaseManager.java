@@ -25,7 +25,8 @@ public class DiseaseManager {
             new ElytraCorrosion(),
             new Puke(),
             new SwapItems(),
-            new Dream()
+            new Dream(),
+            new BloodyCough()
     );
 
     private static Symptom getRandomSymptomFromLevel(int level) {
