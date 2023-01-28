@@ -134,7 +134,7 @@ public class Dream  implements Symptom{
 
     @Override
     public int getLevel() {
-        return 4;
+        return 6;
     }
 }
 
