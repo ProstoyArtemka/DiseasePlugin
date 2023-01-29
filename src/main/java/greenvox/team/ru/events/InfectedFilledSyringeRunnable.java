@@ -2,6 +2,8 @@ package greenvox.team.ru.events;
 
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.recipes.SyringeRecipe;
+import greenvox.team.ru.util.RayTrace;
+import greenvox.team.ru.util.RemoveAndAddItemFromHandToHand;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,17 +12,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 
 public class InfectedFilledSyringeRunnable extends BukkitRunnable {
-    int mainTimer = 0;
-    int progressTimer = 0;
-    Player player;
-    Player target;
-    Vector playerStartLoc;
-    Vector targetStartLoc;
+    private int mainTimer = 0;
+    private int progressTimer = 0;
+    private final Player player;
+    private final Player target;
+    private final Vector playerStartLoc;
+    private final Vector targetStartLoc;
 
     public InfectedFilledSyringeRunnable(Player player, Player target) {
 
@@ -50,8 +51,8 @@ public class InfectedFilledSyringeRunnable extends BukkitRunnable {
          if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRunnable.InfectedSyringeTag)) {
 
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
-            player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
-            player.getInventory().addItem(SyringeRecipe.Syringe);
+
+            RemoveAndAddItemFromHandToHand.RemoveAndAdd(player, 1, SyringeRecipe.Syringe);
 
             target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 1));
 
@@ -71,7 +72,7 @@ public class InfectedFilledSyringeRunnable extends BukkitRunnable {
     }
 
     private void progress(){
-        StringBuffer str = new StringBuffer("&aoooooo");
+        StringBuilder str = new StringBuilder("&aoooooo");
         str.insert(progressTimer+3, "&c");
 
         player.sendActionBar(ChatColor.translateAlternateColorCodes('&', String.valueOf(str)));
@@ -95,18 +96,10 @@ public class InfectedFilledSyringeRunnable extends BukkitRunnable {
 
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR) return true;
 
-        if(rayTrace() == null) return true;
-        if(!rayTrace().getHitEntity().equals(target)) return true;
+        if(RayTrace.TracePlayer(player, 2) == null) return true;
+        if(!RayTrace.TracePlayer(player, 2).getHitEntity().equals(target)) return true;
 
         return false;
     }
-    private RayTraceResult rayTrace(){
-        RayTraceResult rayTraceResult = player.getWorld().rayTraceEntities(
-                player.getEyeLocation(),
-                player.getEyeLocation().getDirection(),
-                2,
-                entity -> entity!=player && entity instanceof Player
-        );
-        return rayTraceResult;
-    }
+
 }

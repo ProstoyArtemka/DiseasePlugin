@@ -17,8 +17,10 @@ public class onPillsEatEvent implements Listener {
         if (e.getItem().getItemMeta().getPersistentDataContainer().has(PillsRecipe.PillsTag)) {
 
             DatabaseManager.setDiseaseLevelToPlayer(player, DatabaseManager.getDiseaseLevelFromPlayer(player) - 1);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 3));
 
+            if (DatabaseManager.getDiseaseLevelFromPlayer(player) > 0) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 3));
+            }
             if (DatabaseManager.getDiseaseLevelFromPlayer(player) <= 0) {
                 DatabaseManager.setDiseaseLevelToPlayer(player, 0);
             }

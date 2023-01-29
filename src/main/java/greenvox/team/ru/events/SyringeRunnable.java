@@ -3,6 +3,8 @@ package greenvox.team.ru.events;
 import greenvox.team.ru.Main;
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.recipes.SyringeRecipe;
+import greenvox.team.ru.util.RayTrace;
+import greenvox.team.ru.util.RemoveAndAddItemFromHandToHand;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -22,12 +24,12 @@ import java.util.Arrays;
 
 
 public class SyringeRunnable extends BukkitRunnable {
-    int mainTimer = 0;
-    int progressTimer = 0;
-    Player player;
-    Player target;
-    Vector playerStartLoc;
-    Vector targetStartLoc;
+    private int mainTimer = 0;
+    private int progressTimer = 0;
+    private final Player player;
+    private final Player target;
+    private final Vector playerStartLoc;
+    private final Vector targetStartLoc;
     public static ItemStack InfectedSyringe = new ItemStack(Material.GLASS_BOTTLE);
     public static NamespacedKey InfectedSyringeTag = NamespacedKey.fromString("filled_tag", Main.getInstance());
 
@@ -74,8 +76,7 @@ public class SyringeRunnable extends BukkitRunnable {
 
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
 
-                player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
-                player.getInventory().addItem(InfectedSyringe);
+                RemoveAndAddItemFromHandToHand.RemoveAndAdd(player, 1, InfectedSyringe);
 
                 target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 1));
 
@@ -95,7 +96,7 @@ public class SyringeRunnable extends BukkitRunnable {
     }
 
     private void progress(){
-        StringBuffer str = new StringBuffer("&aoooooo");
+        StringBuilder str = new StringBuilder("&aoooooo");
         str.insert(progressTimer+3, "&c");
 
         player.sendActionBar(ChatColor.translateAlternateColorCodes('&', String.valueOf(str)));
@@ -120,18 +121,9 @@ public class SyringeRunnable extends BukkitRunnable {
         if (!player.getInventory().getItemInMainHand().hasItemMeta()) return true;
         if (player.getInventory().getItemInMainHand().getType() == Material.AIR) return true;
 
-        if(rayTrace() == null) return true;
-        if(!rayTrace().getHitEntity().equals(target)) return true;
+        if(RayTrace.TracePlayer(player,2) == null) return true;
+        if(!RayTrace.TracePlayer(player,2).getHitEntity().equals(target)) return true;
 
         return false;
-    }
-    private RayTraceResult rayTrace(){
-        RayTraceResult rayTraceResult = player.getWorld().rayTraceEntities(
-                player.getEyeLocation(),
-                player.getEyeLocation().getDirection(),
-                2,
-                entity -> entity!=player && entity instanceof Player
-        );
-        return rayTraceResult;
     }
 }

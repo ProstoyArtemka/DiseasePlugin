@@ -14,15 +14,13 @@ import greenvox.team.ru.symptoms.dream.CustomChunkGenerator;
 import greenvox.team.ru.symptoms.dream.Dream;
 import greenvox.team.ru.symptoms.dream.Events;
 import io.github.kosmx.emotes.api.events.server.ServerEmoteAPI;
+import greenvox.team.ru.symptoms.dream.CustomChunkGenerator;
+import greenvox.team.ru.symptoms.dream.Events;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.HashMap;
-import java.util.UUID;
-import java.util.logging.Logger;
 
 public final class Main extends JavaPlugin {
 
@@ -37,11 +35,11 @@ public final class Main extends JavaPlugin {
 
         NPCLib.getInstance().registerPlugin(Instance);
 
-        WorldCreator world = new WorldCreator("dream");
-        world.generator(new CustomChunkGenerator());
-        world.generateStructures(false);
-        world.environment(World.Environment.NETHER);
-        world.type(WorldType.FLAT);
+       WorldCreator world = new WorldCreator("dream");
+       world.generator(new CustomChunkGenerator());
+       world.generateStructures(false);
+       world.environment(World.Environment.NETHER);
+       world.type(WorldType.FLAT);
 
         dream = Bukkit.createWorld(world);
 
@@ -59,9 +57,6 @@ public final class Main extends JavaPlugin {
 
         registerCrafts();
 
-//        HashMap<UUID, KeyframeAnimation> emotes = ServerEmoteAPI.getLoadedEmotes();
-//        Logger log = Bukkit.getLogger();
-//        log.info(emotes.toString());
 
 
 
