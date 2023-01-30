@@ -48,7 +48,7 @@ public class InfectedSyringeRunnable extends BukkitRunnable {
     private void success() {
         UseAtAnotherPlayer.alreadyUse.remove(player.getName());
 
-         if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRunnable.InfectedSyringeTag)) {
+         if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRecipe.InfectedSyringeTag)) {
 
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
 

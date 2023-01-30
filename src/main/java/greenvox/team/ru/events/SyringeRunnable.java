@@ -29,20 +29,6 @@ public class SyringeRunnable extends BukkitRunnable {
     private final Player target;
     private final Vector playerStartLoc;
     private final Vector targetStartLoc;
-    public static ItemStack InfectedSyringe = new ItemStack(Material.GLASS_BOTTLE);
-    public static NamespacedKey InfectedSyringeTag = NamespacedKey.fromString("filled_tag", Main.getInstance());
-
-    static {
-        ItemMeta meta = InfectedSyringe.getItemMeta();
-
-        meta.setDisplayName(ChatColor.WHITE + "Шприц с кровью");
-        meta.setLore(Arrays.asList(
-                ChatColor.DARK_GRAY + "Кровь в данном шприце имеет странноватый оттенок."
-        ));
-        meta.setCustomModelData(615);
-        meta.getPersistentDataContainer().set(InfectedSyringeTag, PersistentDataType.INTEGER, 3);
-        InfectedSyringe.setItemMeta(meta);
-    }
 
 
     public SyringeRunnable(Player player, Player target) {
@@ -75,7 +61,7 @@ public class SyringeRunnable extends BukkitRunnable {
 
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
 
-                PlayerUtil.DecreaseItemInPlayerHand(player, 1, InfectedSyringe);
+                PlayerUtil.DecreaseItemInPlayerHand(player, 1, SyringeRecipe.InfectedSyringe);
 
                 target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 1));
 

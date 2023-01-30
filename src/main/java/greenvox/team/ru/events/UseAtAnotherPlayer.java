@@ -41,13 +41,12 @@ public class UseAtAnotherPlayer implements Listener {
             String infectedFilledSyringe = "InfectedFilled_task_" + player.getName();
 
             if (player.getInventory().getItemInMainHand().hasItemMeta()) {
-                if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRunnable.InfectedSyringeTag)) {
+                if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRecipe.InfectedSyringeTag)) {
 
                     alreadyUse.add(player.getName());
                     SchedulerManager.runTaskTimer(infectedFilledSyringe, new InfectedSyringeRunnable(player, (Player) entity), 1, 1);
                 }
             }
-
         }
     }
 }
