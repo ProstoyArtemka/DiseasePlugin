@@ -4,7 +4,7 @@ import greenvox.team.ru.Main;
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.recipes.SyringeRecipe;
 import greenvox.team.ru.util.RayTrace;
-import greenvox.team.ru.util.RemoveAndAddItemFromHandToHand;
+import greenvox.team.ru.util.PlayerUtil;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -17,7 +17,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
 
 import java.util.Arrays;
@@ -76,7 +75,7 @@ public class SyringeRunnable extends BukkitRunnable {
 
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
 
-                RemoveAndAddItemFromHandToHand.RemoveAndAdd(player, 1, InfectedSyringe);
+                PlayerUtil.DecreaseItemInPlayerHand(player, 1, InfectedSyringe);
 
                 target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 1));
 

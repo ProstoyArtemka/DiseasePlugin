@@ -1,20 +1,16 @@
 package greenvox.team.ru;
 
-import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
 import dev.sergiferry.playernpc.api.NPCLib;
 import greenvox.team.ru.commands.DiseaseCommand;
 import greenvox.team.ru.database.DataBase;
 import greenvox.team.ru.disease.DiseaseManager;
 import greenvox.team.ru.events.UseAtAnotherPlayer;
-import greenvox.team.ru.events.onPillsEatEvent;
+import greenvox.team.ru.events.OnPillsEatEvent;
 import greenvox.team.ru.recipes.MaskRecipe;
 import greenvox.team.ru.recipes.PillsRecipe;
 import greenvox.team.ru.recipes.SyringeRecipe;
 import greenvox.team.ru.symptoms.dream.CustomChunkGenerator;
 import greenvox.team.ru.symptoms.dream.Dream;
-import greenvox.team.ru.symptoms.dream.Events;
-import io.github.kosmx.emotes.api.events.server.ServerEmoteAPI;
-import greenvox.team.ru.symptoms.dream.CustomChunkGenerator;
 import greenvox.team.ru.symptoms.dream.Events;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -45,7 +41,7 @@ public final class Main extends JavaPlugin {
 
         Bukkit.getServer().getPluginManager().registerEvents(new Events(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new UseAtAnotherPlayer(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new onPillsEatEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new OnPillsEatEvent(), this);
 
 
         Data = new DataBase("database.yml");

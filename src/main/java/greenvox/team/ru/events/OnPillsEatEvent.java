@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class onPillsEatEvent implements Listener {
+public class OnPillsEatEvent implements Listener {
     @EventHandler
     public void onEat(PlayerItemConsumeEvent e) {
         Player player = e.getPlayer();

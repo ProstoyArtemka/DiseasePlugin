@@ -3,7 +3,7 @@ package greenvox.team.ru.events;
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.recipes.SyringeRecipe;
 import greenvox.team.ru.util.RayTrace;
-import greenvox.team.ru.util.RemoveAndAddItemFromHandToHand;
+import greenvox.team.ru.util.PlayerUtil;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,7 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 
-public class InfectedFilledSyringeRunnable extends BukkitRunnable {
+public class InfectedSyringeRunnable extends BukkitRunnable {
     private int mainTimer = 0;
     private int progressTimer = 0;
     private final Player player;
@@ -23,7 +23,7 @@ public class InfectedFilledSyringeRunnable extends BukkitRunnable {
     private final Vector playerStartLoc;
     private final Vector targetStartLoc;
 
-    public InfectedFilledSyringeRunnable(Player player, Player target) {
+    public InfectedSyringeRunnable(Player player, Player target) {
 
         this.player = player;
         playerStartLoc = player.getLocation().toVector();
@@ -52,7 +52,7 @@ public class InfectedFilledSyringeRunnable extends BukkitRunnable {
 
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
 
-            RemoveAndAddItemFromHandToHand.RemoveAndAdd(player, 1, SyringeRecipe.Syringe);
+            PlayerUtil.DecreaseItemInPlayerHand(player, 1, SyringeRecipe.Syringe);
 
             target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 1));
 

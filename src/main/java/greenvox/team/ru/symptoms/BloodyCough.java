@@ -1,10 +1,9 @@
 package greenvox.team.ru.symptoms;
 
-import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.disease.Symptom;
 import greenvox.team.ru.recipes.MaskRecipe;
 import greenvox.team.ru.util.ApplyDisease;
-import greenvox.team.ru.util.RandomDamage;
+import greenvox.team.ru.util.PlayerUtil;
 import greenvox.team.ru.util.RayTrace;
 import org.bukkit.*;
 import org.bukkit.block.data.BlockData;
@@ -14,10 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
-
-import java.util.*;
 
 public class BloodyCough implements Symptom {
 
@@ -38,7 +34,7 @@ public class BloodyCough implements Symptom {
 
         if (head.getType() != Material.AIR) {
             if (head.getItemMeta().getPersistentDataContainer().has(MaskRecipe.MaskTag)) {
-               RandomDamage.randomDamage(player, 5, 1);
+               PlayerUtil.RandomDamage(player, 5, 1);
                spawnParticle(player, vectorWithMask, fallingDustData);
 
                player.playSound(player.getLocation(), Sound.ENTITY_PANDA_SNEEZE, 1,1);
@@ -47,7 +43,7 @@ public class BloodyCough implements Symptom {
             }
         } else {
             spawnParticle(player, vectorWithOutMask, fallingDustData);
-            RandomDamage.randomDamage(player, 5, 1);
+            PlayerUtil.RandomDamage(player, 5, 1);
             player.playSound(player.getLocation(), Sound.ENTITY_PANDA_SNEEZE, 1,1);
 
             if (RayTrace.TracePlayer(player, 5) == null) return;

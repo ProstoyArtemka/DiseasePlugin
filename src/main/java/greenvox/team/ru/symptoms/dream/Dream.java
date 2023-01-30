@@ -3,15 +3,13 @@ package greenvox.team.ru.symptoms.dream;
 import dev.sergiferry.playernpc.api.NPC;
 import dev.sergiferry.playernpc.api.NPCLib;
 import greenvox.team.ru.Main;
-import greenvox.team.ru.database.DataBase;
 import greenvox.team.ru.disease.Symptom;
-import greenvox.team.ru.util.FreezePlayer;
+import greenvox.team.ru.util.FreezePlayerScheduler;
 import greenvox.team.ru.util.SchedulerManager;
 import io.github.kosmx.emotes.api.events.server.ServerEmoteAPI;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -35,7 +33,7 @@ public class Dream  implements Symptom{
         if(!player.isOnGround()) return;
         if( new Random().nextInt(1, 3) != 1) return;
 
-        FreezePlayer.freeze(player, 100);
+        FreezePlayerScheduler.freeze(player, 100);
         ServerEmoteAPI.forcePlayEmote(player.getUniqueId(),
                 ServerEmoteAPI.getEmote(UUID.fromString("ce18f311-0000-0000-0000-000000000000")));
         new DreamScheduler(player).runTaskLater(Main.getInstance(), 100);
