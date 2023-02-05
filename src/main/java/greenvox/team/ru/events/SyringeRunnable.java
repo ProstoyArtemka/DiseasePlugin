@@ -1,26 +1,19 @@
 package greenvox.team.ru.events;
 
-import greenvox.team.ru.Main;
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.recipes.SyringeRecipe;
+import greenvox.team.ru.util.BloodLevelUtil;
 import greenvox.team.ru.util.RayTrace;
 import greenvox.team.ru.util.PlayerUtil;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.entity.Player;;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
-import java.util.Arrays;
-
 
 public class SyringeRunnable extends BukkitRunnable {
     private int mainTimer = 0;
@@ -61,13 +54,20 @@ public class SyringeRunnable extends BukkitRunnable {
 
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
 
-                PlayerUtil.DecreaseItemInPlayerHand(player, 1, SyringeRecipe.InfectedSyringe);
+                PlayerUtil.DecreaseItemInPlayerHand(player, 1, InfectedSyringeRunnable.InfectedSyringe);
 
-                target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20, 1));
+                target.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 10 * 20 * DatabaseManager.getBloodLevelFromPlayer(target),
+                        1));
+
+                PlayerUtil.RandomDamage(target, 4, 1);
 
                 SchedulerManager.cancelTask("syringe_task_" + player.getName());
             }
         }
+
+        BloodLevelUtil.bloodLevelDeath(target);
+        BloodLevelUtil.bloodLevelMessages(target);
+        BloodLevelUtil.addBloodLevel(target);
     }
     private void fail(){
 

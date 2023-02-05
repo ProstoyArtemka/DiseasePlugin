@@ -15,6 +15,10 @@ import java.util.List;
 public class UseAtAnotherPlayer implements Listener {
     public static List<String> alreadyUse = new ArrayList<>();
 
+    static {
+
+    }
+
 
     @EventHandler
     public void useAtAnotherPlayer(PlayerInteractEntityEvent e) {
@@ -22,29 +26,33 @@ public class UseAtAnotherPlayer implements Listener {
             alreadyUse.remove(e.getPlayer().getName());
         }
 
-        Player player = e.getPlayer();
         Entity entity = e.getRightClicked();
         if (!(entity instanceof Player)) return;
+
+        Player player = e.getPlayer();
 
         if (DatabaseManager.isPlayerIsInfected((Player) entity)) {
             String taskName = "syringe_task_" + player.getName();
 
             if (player.getInventory().getItemInMainHand().hasItemMeta()) {
-                if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRecipe.SyringeTag)) {
+                if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRecipe.SyringeTag)) {
 
                     alreadyUse.add(player.getName());
                     SchedulerManager.runTaskTimer(taskName, new SyringeRunnable(player, (Player) entity), 1, 1);
 
                 }
             }
-        } else {
-            String infectedFilledSyringe = "InfectedFilled_task_" + player.getName();
+        }
+
+        if (!DatabaseManager.isPlayerIsInfected((Player) entity)) {
+
+            String taskName2 = "InfectedFilled_task_" + player.getName();
 
             if (player.getInventory().getItemInMainHand().hasItemMeta()) {
-                if (e.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRecipe.InfectedSyringeTag)) {
+                if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(InfectedSyringeRunnable.InfectedSyringeTag)) {
 
                     alreadyUse.add(player.getName());
-                    SchedulerManager.runTaskTimer(infectedFilledSyringe, new InfectedSyringeRunnable(player, (Player) entity), 1, 1);
+                    SchedulerManager.runTaskTimer(taskName2, new InfectedSyringeRunnable(player, (Player) entity), 1, 1);
                 }
             }
         }

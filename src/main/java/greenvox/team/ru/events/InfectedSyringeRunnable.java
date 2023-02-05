@@ -1,14 +1,18 @@
 package greenvox.team.ru.events;
 
+import greenvox.team.ru.Main;
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.recipes.SyringeRecipe;
+import greenvox.team.ru.util.ItemUtil;
 import greenvox.team.ru.util.RayTrace;
 import greenvox.team.ru.util.PlayerUtil;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -22,6 +26,14 @@ public class InfectedSyringeRunnable extends BukkitRunnable {
     private final Player target;
     private final Vector playerStartLoc;
     private final Vector targetStartLoc;
+
+    public static ItemStack InfectedSyringe = new ItemStack(Material.GLASS_BOTTLE);
+    public static NamespacedKey InfectedSyringeTag = NamespacedKey.fromString("filled_tag", Main.getInstance());
+
+    static {
+        ItemUtil.metaUtil(InfectedSyringe, "Шприц с кровью", "Кровь в данном шприце имеет странноватый оттенок.",
+                615, InfectedSyringeTag, 3);
+    }
 
     public InfectedSyringeRunnable(Player player, Player target) {
 
@@ -48,7 +60,7 @@ public class InfectedSyringeRunnable extends BukkitRunnable {
     private void success() {
         UseAtAnotherPlayer.alreadyUse.remove(player.getName());
 
-         if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(SyringeRecipe.InfectedSyringeTag)) {
+         if (player.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(InfectedSyringeTag)) {
 
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.2f, 0.9f);
 
