@@ -6,7 +6,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public class BloodLevelUtil {
+
+    private static final List<String> bloodMessages = Arrays.asList(
+            "&cВаше тело становится слабее",
+            "&cВаши конечности начинают неметь",
+            "&cВаш слух становится слабее",
+            "&cВаши конечности холоднеют",
+            "&cВ ваших глаха начинает темнеть"
+    );
+
 
     public static void addBloodLevel(Player player) {
 
@@ -17,17 +31,15 @@ public class BloodLevelUtil {
     }
 
     public static void bloodLevelMessages(Player player) {
-        if (DatabaseManager.getBloodLevelFromPlayer(player) == 2) {
+        if (DatabaseManager.getBloodLevelFromPlayer(player) == 5) {
 
-            String str = "&cВаше тело становится слабее";
-            player.sendActionBar(ChatColor.translateAlternateColorCodes('&', str));
+            Random randomFromList = new Random();
+            int message = randomFromList.nextInt(bloodMessages.size());
+
+            String randomElement = bloodMessages.get(message);
+
+            player.sendActionBar(ChatColor.translateAlternateColorCodes('&', randomElement));
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 10 * 20,1));
-        }
-
-        if (DatabaseManager.getBloodLevelFromPlayer(player) == 4) {
-
-            String str = "&cВаши конечности начинают неметь";
-            player.sendActionBar(ChatColor.translateAlternateColorCodes('&', str));
         }
     }
 

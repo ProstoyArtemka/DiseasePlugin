@@ -4,6 +4,7 @@ import dev.sergiferry.playernpc.api.NPCLib;
 import greenvox.team.ru.commands.DiseaseCommand;
 import greenvox.team.ru.database.DataBase;
 import greenvox.team.ru.disease.DiseaseManager;
+import greenvox.team.ru.events.OnClickOnWaterEvent;
 import greenvox.team.ru.events.UseAtAnotherPlayer;
 import greenvox.team.ru.recipes.MaskRecipe;
 import greenvox.team.ru.recipes.SyringeRecipe;
@@ -40,6 +41,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new Events(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new UseAtAnotherPlayer(), this);
         //Bukkit.getServer().getPluginManager().registerEvents(new OnPillsEatEvent(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new OnClickOnWaterEvent(), this);
 
         Data = new DataBase("database.yml");
 
