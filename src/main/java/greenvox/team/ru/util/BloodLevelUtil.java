@@ -20,7 +20,9 @@ public class BloodLevelUtil {
             "&cВаши конечности холоднеют",
             "&cВ ваших глаха начинает темнеть"
     );
-
+   private static final Random randomFromList = new Random();
+   private static final int message = randomFromList.nextInt(bloodMessages.size());
+   private static final String randomElement = bloodMessages.get(message);
 
     public static void addBloodLevel(Player player) {
 
@@ -33,10 +35,7 @@ public class BloodLevelUtil {
     public static void bloodLevelMessages(Player player) {
         if (DatabaseManager.getBloodLevelFromPlayer(player) == 5) {
 
-            Random randomFromList = new Random();
-            int message = randomFromList.nextInt(bloodMessages.size());
 
-            String randomElement = bloodMessages.get(message);
 
             player.sendActionBar(ChatColor.translateAlternateColorCodes('&', randomElement));
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 10 * 20,1));
