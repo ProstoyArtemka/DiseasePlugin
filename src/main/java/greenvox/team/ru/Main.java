@@ -41,7 +41,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new Events(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new UseAtAnotherPlayer(), this);
         //Bukkit.getServer().getPluginManager().registerEvents(new OnPillsEatEvent(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new OnClickOnWaterEvent(), this);
+        //Bukkit.getServer().getPluginManager().registerEvents(new OnClickOnWaterEvent(), this);
 
         Data = new DataBase("database.yml");
 
