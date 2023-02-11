@@ -3,6 +3,7 @@ package greenvox.team.ru.disease;
 import greenvox.team.ru.Main;
 import greenvox.team.ru.symptoms.*;
 //import greenvox.team.ru.symptoms.dream.Dream;
+import greenvox.team.ru.symptoms.dream.Dream;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.entity.Player;
 
@@ -25,7 +26,7 @@ public class DiseaseManager {
             new ElytraCorrosion(),
             new Puke(),
             new SwapItems(),
-            //new Dream(),
+            new Dream(),
             new BloodyCough()
     );
 

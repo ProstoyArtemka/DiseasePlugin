@@ -35,10 +35,9 @@ public class BloodLevelUtil {
     public static void bloodLevelMessages(Player player) {
         if (DatabaseManager.getBloodLevelFromPlayer(player) == 5) {
 
-
-
             player.sendActionBar(ChatColor.translateAlternateColorCodes('&', randomElement));
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 10 * 20,1));
+
         }
     }
 
