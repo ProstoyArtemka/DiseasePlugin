@@ -14,6 +14,7 @@ public class DiseaseExecutor extends BukkitRunnable {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (!DatabaseManager.isPlayerIsInfected(p)) continue;
             int level = DatabaseManager.getDiseaseLevelFromPlayer(p);
+            if (level < 0) continue;
 
             SchedulerManager.runTaskLater("symptom_execute_" + p.getName(), new BukkitRunnable() {
                 @Override
