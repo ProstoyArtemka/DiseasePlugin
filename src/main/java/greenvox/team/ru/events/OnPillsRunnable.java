@@ -30,6 +30,7 @@ public class OnPillsRunnable extends BukkitRunnable {
     }
 
     public static void onDisable() {
+        if (player == null) return;
             DatabaseManager.setDiseaseLevelToPlayer(player, diseaseLvl);
         }
     }

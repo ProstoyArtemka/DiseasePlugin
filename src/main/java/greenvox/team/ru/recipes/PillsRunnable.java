@@ -1,6 +1,8 @@
 package greenvox.team.ru.recipes;
 
 import com.dre.brewery.api.BreweryApi;
+import greenvox.team.ru.events.InfectedSyringeRunnable;
+import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -8,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class PillsRunnable extends BukkitRunnable {
+
     @Override
     public void run() {
 
@@ -19,15 +22,18 @@ public class PillsRunnable extends BukkitRunnable {
                 if (stack.getType() != Material.POTION) continue;
                 if (!BreweryApi.isBrew(stack)) continue;
 
-                ItemStack pills = PillsCraft.pills(stack.getItemMeta().getDisplayName());
+                    ItemStack pills = PillsCraft.pills(stack.getItemMeta().getDisplayName());
 
-                if (pills != null) {
+                    if (pills != null) {
 
-                    player.getInventory().remove(stack);
-                    player.getInventory().addItem(pills);
+                        player.getInventory().remove(stack);
+                        player.getInventory().addItem(pills);
 
+                    }
+
+                    SchedulerManager.cancelTask("pills_runnable");
                 }
             }
         }
     }
-}
+

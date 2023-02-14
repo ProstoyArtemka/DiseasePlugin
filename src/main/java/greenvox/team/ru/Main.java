@@ -55,9 +55,6 @@ public final class Main extends JavaPlugin {
 
         registerCrafts();
 
-
-
-
     }
 
     private void registerCrafts() {

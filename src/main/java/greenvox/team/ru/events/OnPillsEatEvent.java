@@ -33,8 +33,9 @@ public class OnPillsEatEvent implements Listener {
 
             player.sendActionBar(ChatColor.translateAlternateColorCodes('&', message));
 
+            SchedulerManager.runTaskLater("Pills_run" + player.getName(), new OnPillsRunnable(player, lvl), 10 * 20);
         }
-        SchedulerManager.runTaskLater("Pills_run" + player.getName(), new OnPillsRunnable(player, lvl), 10 * 300);
+
     }
 
 

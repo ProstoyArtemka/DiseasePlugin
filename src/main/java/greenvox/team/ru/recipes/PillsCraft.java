@@ -8,10 +8,6 @@ import org.bukkit.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
-
-import java.util.Arrays;
 
 public class PillsCraft implements Listener {
 
@@ -20,7 +16,7 @@ public class PillsCraft implements Listener {
     public static ItemStack pills(String name) {
         ItemStack pills = new ItemStack(Material.SUSPICIOUS_STEW, 1);
 
-        ItemUtil.metaUtil(pills, "Пилюля", "Возожно сможет ослабить вашу болезнь.",
+        ItemUtil.metaUtil(pills, "Пилюля", "Возможно сможет ослабить вашу болезнь.",
                 614, PillsTag, 4);
 
         return pills;
@@ -30,7 +26,7 @@ public class PillsCraft implements Listener {
     public void OnBrewEvent(BrewModifyEvent e) {
         if (pills(e.getItemMeta().getDisplayName()) == null) return;
 
-        SchedulerManager.runTaskLater("pills_runnable", new PillsRunnable(), 2);
+        SchedulerManager.runTaskLater("pills_runnable", new PillsRunnable(), 1);
     }
 }
 
