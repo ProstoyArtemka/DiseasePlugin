@@ -27,7 +27,8 @@ public class DiseaseManager {
             new Puke(),
             new SwapItems(),
             new Dream(),
-            new BloodyCough()
+            new BloodyCough(),
+            new Hallucinations()
     );
 
     private static Symptom getRandomSymptomFromLevel(int level) {
