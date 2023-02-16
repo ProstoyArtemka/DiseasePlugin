@@ -26,7 +26,7 @@ public class DiseaseManager {
             new ElytraCorrosion(),
             new Puke(),
             new SwapItems(),
-            new Dream(),
+            //new Dream(),
             new BloodyCough(),
             new Hallucinations()
     );

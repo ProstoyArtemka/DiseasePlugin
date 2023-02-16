@@ -1,4 +1,5 @@
 package greenvox.team.ru.recipes;
+import com.dre.brewery.api.events.brew.BrewDrinkEvent;
 import com.dre.brewery.api.events.brew.BrewModifyEvent;
 
 import greenvox.team.ru.Main;
@@ -9,26 +10,32 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+
 public class PillsCraft implements Listener {
 
     public static NamespacedKey PillsTag = NamespacedKey.fromString("pills_tag", Main.getInstance());
 
     public static ItemStack pills(String name) {
-        ItemStack pills = new ItemStack(Material.SUSPICIOUS_STEW, 1);
+        name = name.replaceAll(ChatColor.WHITE.toString(), "");
 
-        ItemUtil.metaUtil(pills, "Пилюля", "Возможно сможет ослабить вашу болезнь.",
+        ItemStack pills1 = new ItemStack(Material.SUSPICIOUS_STEW, 1);
+
+
+        ItemUtil.metaUtil(pills1, "Пилюля", "Возможно сможет ослабить вашу болезнь.",
                 614, PillsTag, 4);
 
-        return pills;
+        return pills1;
     }
 
     @EventHandler
     public void OnBrewEvent(BrewModifyEvent e) {
         if (pills(e.getItemMeta().getDisplayName()) == null) return;
 
-        SchedulerManager.runTaskLater("pills_runnable", new PillsRunnable(), 1);
+        if (e.getBrew().getCurrentRecipe() != null) {
+            if (!e.getBrew().getCurrentRecipe().hasName("Странная смесь")) return;
+
+            SchedulerManager.runTaskLater("pills_runnable", new PillsRunnable(), 1);
+        }
     }
 }
-
-
 

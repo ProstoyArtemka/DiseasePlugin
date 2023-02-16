@@ -33,7 +33,7 @@ public class OnPillsEatEvent implements Listener {
             DatabaseManager.setDiseaseLevelToPlayer(player, -1);
             player.sendActionBar(ChatColor.translateAlternateColorCodes('&', message));
 
-            SchedulerManager.runTaskLater("Pills_run" + player.getName(), new OnPillsRunnable(player, playersLvl), 10 * 20);
+            SchedulerManager.runTaskLater("Pills_run" + player.getName(), new OnPillsRunnable(player, playersLvl), 300 * 20);
         }
 
     }
