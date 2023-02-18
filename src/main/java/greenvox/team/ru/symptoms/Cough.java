@@ -1,9 +1,8 @@
 package greenvox.team.ru.symptoms;
 
+import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.disease.Symptom;
-import greenvox.team.ru.events.SyringeRunnable;
 import greenvox.team.ru.recipes.MaskRecipe;
-import greenvox.team.ru.recipes.SyringeRecipe;
 import greenvox.team.ru.util.ApplyDisease;
 import greenvox.team.ru.util.RayTrace;
 import org.bukkit.*;
@@ -38,6 +37,7 @@ public class Cough implements Symptom {
         Player tracedPlayer = (Player) RayTrace.TracePlayer(player, 5).getHitEntity();
 
         if (tracedPlayer == null) return;
+        if (DatabaseManager.isAteVaccine(tracedPlayer)) return;
         ApplyDisease.applyDisease(player, tracedPlayer);
     }
 

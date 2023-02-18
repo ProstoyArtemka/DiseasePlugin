@@ -1,5 +1,6 @@
 package greenvox.team.ru.symptoms;
 
+import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.disease.Symptom;
 import greenvox.team.ru.recipes.MaskRecipe;
 import greenvox.team.ru.util.ApplyDisease;
@@ -50,6 +51,7 @@ public class BloodyCough implements Symptom {
             Player tracedPlayer = (Player) RayTrace.TracePlayer(player, 5).getHitEntity();
 
             if (tracedPlayer == null) return;
+            if (DatabaseManager.isAteVaccine(tracedPlayer)) return;
             ApplyDisease.applyDisease(player, tracedPlayer);
         }
     }

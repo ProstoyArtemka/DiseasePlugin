@@ -1,13 +1,14 @@
 package greenvox.team.ru.util;
 
 import greenvox.team.ru.Main;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class FreezePlayerScheduler extends BukkitRunnable{
-    int progressTimer = 1;
     int time;
+    int Count = 0;
     Location location;
     Player player;
     public static void freeze(Player player, int time){
@@ -22,8 +23,8 @@ public class FreezePlayerScheduler extends BukkitRunnable{
 
     @Override
     public void run() {
-        if(progressTimer%100 == 0) cancel();
+        if (Count == time) cancel();
         player.teleport(location);
-        progressTimer++;
+        Count++;
     }
 }

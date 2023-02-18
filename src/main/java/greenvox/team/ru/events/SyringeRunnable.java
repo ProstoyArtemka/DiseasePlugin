@@ -100,6 +100,8 @@ public class SyringeRunnable extends BukkitRunnable {
         if(player.isDead()) return true;
         if(target.isDead()) return true;
 
+        if (DatabaseManager.isAteVaccine(target)) return true;
+
         if(!player.getLocation().toVector().equals(playerStartLoc)) return true;
         if(!target.getLocation().toVector().equals(targetStartLoc)) return true;
 

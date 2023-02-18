@@ -6,6 +6,7 @@ import greenvox.team.ru.database.DataBase;
 import greenvox.team.ru.disease.DiseaseManager;
 import greenvox.team.ru.events.OnPillsEatEvent;
 import greenvox.team.ru.events.OnPillsRunnable;
+import greenvox.team.ru.events.OnVaccineEatEvent;
 import greenvox.team.ru.events.UseAtAnotherPlayer;
 import greenvox.team.ru.recipes.MaskRecipe;
 import greenvox.team.ru.recipes.PillsCraft;
@@ -44,6 +45,7 @@ public final class Main extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new UseAtAnotherPlayer(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new OnPillsEatEvent(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PillsCraft(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new OnVaccineEatEvent(), this);
         //Bukkit.getServer().getPluginManager().registerEvents(new OnClickOnWaterEvent(), this);
 
         Data = new DataBase("database.yml");

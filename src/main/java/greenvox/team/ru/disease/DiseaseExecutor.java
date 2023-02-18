@@ -13,6 +13,7 @@ public class DiseaseExecutor extends BukkitRunnable {
     public void run() {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (!DatabaseManager.isPlayerIsInfected(p)) continue;
+            if (DatabaseManager.isAteVaccine(p)) continue;
             int level = DatabaseManager.getDiseaseLevelFromPlayer(p);
             if (level < 0) continue;
 

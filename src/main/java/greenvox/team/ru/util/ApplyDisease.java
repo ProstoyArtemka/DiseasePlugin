@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class ApplyDisease {
     public static void applyDisease(Player player, Player tracedPlayer) {
+
         ItemStack head = player.getInventory().getItem(EquipmentSlot.HEAD);
 
         if (head.getType() != Material.AIR)

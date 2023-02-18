@@ -35,12 +35,16 @@ public class OnPillsRunnable extends BukkitRunnable {
     }
 
     public static void onDisable() {
-        for (Player player : Bukkit.getOnlinePlayers())
 
-           if (DatabaseManager.getDiseaseLevelFromPlayer(player) < 0) {
-               DatabaseManager.setDiseaseLevelToPlayer(player, diseaseLvl.get(player.getName()));
-           }
-       }
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (DatabaseManager.getDiseaseLevelFromPlayer(player) >= 0) return;
+            if (DatabaseManager.isAteVaccine(player)) return;
+            if (diseaseLvl.get(player.getName()) == null) return;
+
+            if (DatabaseManager.getDiseaseLevelFromPlayer(player) < 0) {
+                DatabaseManager.setDiseaseLevelToPlayer(player, diseaseLvl.get(player.getName()));
+            }
+        }
     }
-
+}
 

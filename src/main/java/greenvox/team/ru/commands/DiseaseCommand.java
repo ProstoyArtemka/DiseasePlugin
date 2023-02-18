@@ -11,6 +11,7 @@ import dev.jorel.commandapi.annotations.arguments.AStringArgument;
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.disease.DiseaseManager;
 import greenvox.team.ru.disease.Symptom;
+import greenvox.team.ru.events.OnVaccineEatEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -54,6 +55,12 @@ public class DiseaseCommand {
     @NeedsOp
     public static void level(Player player, @AIntegerArgument int level) {
         DatabaseManager.setDiseaseLevelToPlayer(player, level);
+    }
+
+    @Subcommand("isInfected")
+    @NeedsOp
+    public static boolean isInfected(Player player) {
+       return DatabaseManager.isPlayerIsInfected(player);
     }
 
     @Subcommand("execute")
