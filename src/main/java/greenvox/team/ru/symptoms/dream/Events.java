@@ -1,6 +1,7 @@
 package greenvox.team.ru.symptoms.dream;
 
 import greenvox.team.ru.Main;
+import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,12 +9,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 
 public class Events implements Listener {
 
-    private static ArrayList<String> quitedPlayers = new ArrayList<>();
+    public static ArrayList<String> quitedPlayers = new ArrayList<>();
 
     @EventHandler
     public void death(PlayerDeathEvent e){
@@ -33,10 +35,16 @@ public class Events implements Listener {
 
             quitedPlayers.add(player.getName());
 
-            int id = Dream.taskIdList.get(player.getName());
+            int id = Dream.returnTaskIdList.get(player.getName());
             Bukkit.getScheduler().cancelTask(id);
 
+        }
+        else if(Dream.playersLocations.containsKey(player.getName())){
 
+            int id = Dream.tpTaskIdList.get(player.getName());
+            Bukkit.getScheduler().cancelTask(id);
+
+            quitedPlayers.add(player.getName());
         }
 
     }
@@ -46,10 +54,11 @@ public class Events implements Listener {
         Player player = e.getPlayer();
 
         if(quitedPlayers.contains(player.getName())){
+            Bukkit.broadcastMessage("yes yes dab dab");
 
-            quitedPlayers.remove(player.getName());
-            new Dream().execute(player);
-
+            Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), ()->{
+                new Dream().execute(player);
+            }, 20L);
         }
 
     }

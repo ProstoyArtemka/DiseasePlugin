@@ -20,10 +20,9 @@ import java.util.UUID;
 
 public class Dream  implements Symptom{
 
-    public static HashMap<String, Integer> NpcIdList = new HashMap<>();
-    public static HashMap<String, Integer> taskIdList = new HashMap<>();
+    public static HashMap<String, Integer> returnTaskIdList = new HashMap<>();
+    public static HashMap<String, Integer> tpTaskIdList = new HashMap<>();
     public static HashMap<String, Location> playersLocations = new HashMap<>();
-    public static int id = 0;
 
     @Override
     public void init(JavaPlugin main) {}
@@ -31,29 +30,27 @@ public class Dream  implements Symptom{
     @Override
     public void execute(Player player) {
         if(!player.isOnGround()) return;
-        if( new Random().nextInt(1, 3) != 1) return;
 
-        FreezePlayerScheduler.freeze(player, 100);
+        if(!Events.quitedPlayers.contains(player.getName())) {
+            if (new Random().nextInt(1, 3) != 1) return;
+        }
+        else Events.quitedPlayers.remove(player.getName());
+
+        Location location = player.getLocation();
+        playersLocations.put(player.getName(), location);
+
+        FreezePlayerScheduler.freeze(player, 99);
         ServerEmoteAPI.forcePlayEmote(player.getUniqueId(),
                 ServerEmoteAPI.getEmote(UUID.fromString("ce18f311-0000-0000-0000-000000000000")));
-        new DreamScheduler(player).runTaskLater(Main.getInstance(), 100);
+
+        int id = new DreamScheduler(player).runTaskLater(Main.getInstance(), 100).getTaskId();
+        tpTaskIdList.put(player.getName(), id);
 
     }
 
 
     public static void tpInDream(Player player){
-        Location location = player.getLocation();
 
-        playersLocations.put(player.getName(), location);
-
-        NPC.Global npc = NPCLib.getInstance().generateGlobalNPC(Main.getInstance(), String.valueOf(id), location);
-        id++;
-
-        npc.setSkin(player);
-        npc.setPose(NPC.Pose.SLEEPING);
-        npc.setShowOnTabList(false);
-        npc.setSleeping(true);
-        npc.update();
 
         int x = new Random().nextInt(5000);
         int z = new Random().nextInt(5000);
@@ -65,16 +62,11 @@ public class Dream  implements Symptom{
 
     public static void returnFromDream(Player player){
 
-        int id = NpcIdList.get(player.getName());
-        NPC.Global npc = NPCLib.getInstance().getGlobalNPC(Main.getInstance(), String.valueOf(id));
 
-        NpcIdList.remove(player.getName());
+        player.teleport(playersLocations.get(player.getName()));
         playersLocations.remove(player.getName());
-
-        player.teleport(npc.getLocation());
         player.chat("/lay");
 
-        npc.destroy();
     }
 
     public static void particle(Player player){
