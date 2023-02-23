@@ -7,7 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
 import java.util.Random;
 
 public class DreamScheduler extends BukkitRunnable {
@@ -22,17 +21,16 @@ public class DreamScheduler extends BukkitRunnable {
     public void run() {
         ServerEmoteAPI.setPlayerPlayingEmote(player.getUniqueId(), null);
 
-        Dream.NpcIdList.put(player.getName(), Dream.id);
 
         Dream.tpInDream(player);
-        int timer = new Random().nextInt(30, 60);
+        int timer = new Random().nextInt(60, 120);
 
         int taskId = Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), ()->{
             Dream.returnFromDream(player);
             SchedulerManager.cancelTask("Dream.particle."+player.getName());
-        }, timer*20);
+        }, timer* 20L);
 
 
-        Dream.taskIdList.put(player.getName(), taskId);
+        Dream.returnTaskIdList.put(player.getName(), taskId);
     }
 }
