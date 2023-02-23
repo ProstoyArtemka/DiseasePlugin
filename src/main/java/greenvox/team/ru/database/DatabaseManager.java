@@ -47,6 +47,7 @@ public class DatabaseManager {
     }
 
     public static boolean isPlayerIsInfected(Player p) {
+        if (Main.getData().getConfig().getInt(p.getName() + ".level") == -1) return false;
         if (isAteVaccine(p)) return false;
         return Main.getData().getConfig().contains(p.getName());
     }
