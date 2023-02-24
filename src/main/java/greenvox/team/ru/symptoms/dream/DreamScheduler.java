@@ -23,7 +23,7 @@ public class DreamScheduler extends BukkitRunnable {
 
 
         Dream.tpInDream(player);
-        int timer = new Random().nextInt(200, 300);
+        int timer = new Random().nextInt(120, 200);
 
         int taskId = Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), ()->{
             Dream.returnFromDream(player);
