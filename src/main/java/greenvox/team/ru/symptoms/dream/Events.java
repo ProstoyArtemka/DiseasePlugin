@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -23,6 +24,11 @@ public class Events implements Listener {
         if(e.getPlayer().getWorld().equals(Main.dream))
             e.setCancelled(true);
 
+    }
+
+    @EventHandler
+    public void onBlock(BlockPlaceEvent e){
+        if(e.getPlayer().getWorld().equals(Main.dream)) e.setCancelled(true);
     }
 
     @EventHandler
@@ -54,7 +60,6 @@ public class Events implements Listener {
         Player player = e.getPlayer();
 
         if(quitedPlayers.contains(player.getName())){
-            Bukkit.broadcastMessage("yes yes dab dab");
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), ()->{
                 new Dream().execute(player);
