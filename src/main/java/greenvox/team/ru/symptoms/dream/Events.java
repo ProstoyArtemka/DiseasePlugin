@@ -2,6 +2,7 @@ package greenvox.team.ru.symptoms.dream;
 
 import greenvox.team.ru.Main;
 import greenvox.team.ru.util.SchedulerManager;
+import io.papermc.paper.event.player.PlayerItemFrameChangeEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,6 +30,13 @@ public class Events implements Listener {
     @EventHandler
     public void onBlock(BlockPlaceEvent e){
         if(e.getPlayer().getWorld().equals(Main.dream)) e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void interactWithFrames(PlayerItemFrameChangeEvent e) {
+        if (e.getPlayer().getWorld().equals(Main.dream)) {
+            e.setCancelled(true);
+        }
     }
 
     @EventHandler
