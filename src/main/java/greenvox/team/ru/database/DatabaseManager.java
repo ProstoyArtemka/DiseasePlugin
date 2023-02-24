@@ -38,6 +38,11 @@ public class DatabaseManager {
         return false;
     }
 
+    public static boolean isAtePills(Player player) {
+        if (Main.getData().getConfig().getInt(player.getName() + ".level") == -1) return true;
+        return false;
+    }
+
     public static void removeDiseaseFromPlayer(Player p) {
         DataBase.delete(p.getName());
     }
@@ -47,7 +52,7 @@ public class DatabaseManager {
     }
 
     public static boolean isPlayerIsInfected(Player p) {
-        if (Main.getData().getConfig().getInt(p.getName() + ".level") == -1) return false;
+        if (isAtePills(p)) return false;
         if (isAteVaccine(p)) return false;
         return Main.getData().getConfig().contains(p.getName());
     }
