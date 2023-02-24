@@ -52,8 +52,8 @@ public class Dream  implements Symptom{
     public static void tpInDream(Player player){
 
 
-        int x = new Random().nextInt(5000);
-        int z = new Random().nextInt(5000);
+        int x = new Random().nextInt(500);
+        int z = new Random().nextInt(500);
 
         player.teleport(new Location(Main.dream, x, 1, z));
         particle(player);
