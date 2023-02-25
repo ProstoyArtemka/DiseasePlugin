@@ -32,7 +32,7 @@ public class Dream  implements Symptom{
         if(!player.isOnGround()) return;
 
         if(!Events.quitedPlayers.contains(player.getName())) {
-            if (new Random().nextInt(1, 3) != 1) return;
+            if (new Random().nextInt(1, 2) != 1) return;
         }
         else Events.quitedPlayers.remove(player.getName());
 
