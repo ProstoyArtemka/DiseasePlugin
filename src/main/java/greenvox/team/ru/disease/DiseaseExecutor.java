@@ -1,5 +1,6 @@
 package greenvox.team.ru.disease;
 
+import greenvox.team.ru.Main;
 import greenvox.team.ru.database.DatabaseManager;
 import greenvox.team.ru.util.SchedulerManager;
 import org.bukkit.Bukkit;
@@ -14,6 +15,7 @@ public class DiseaseExecutor extends BukkitRunnable {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (!DatabaseManager.isPlayerIsInfected(p)) continue;
             if (DatabaseManager.isAteVaccine(p)) continue;
+            if(p.getWorld().equals(Main.dream)) continue;
             int level = DatabaseManager.getDiseaseLevelFromPlayer(p);
             if (level < 0) continue;
 
